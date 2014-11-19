@@ -47,18 +47,18 @@ public final class clear_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("<html>\n");
       out.write("<body>\n");
       out.write("    ");
-      zameczki.AllCastlesData storage = null;
+      zameczki.StorageService castleData = null;
       synchronized (application) {
-        storage = (zameczki.AllCastlesData) _jspx_page_context.getAttribute("storage", PageContext.APPLICATION_SCOPE);
-        if (storage == null){
-          storage = new zameczki.AllCastlesData();
-          _jspx_page_context.setAttribute("storage", storage, PageContext.APPLICATION_SCOPE);
+        castleData = (zameczki.StorageService) _jspx_page_context.getAttribute("castleData", PageContext.APPLICATION_SCOPE);
+        if (castleData == null){
+          castleData = new zameczki.StorageService();
+          _jspx_page_context.setAttribute("castleData", castleData, PageContext.APPLICATION_SCOPE);
         }
       }
       out.write("\n");
       out.write("    ");
 
-        storage.clear();
+    	castleData.clear();
         response.sendRedirect(request.getContextPath());
     
       out.write("\n");

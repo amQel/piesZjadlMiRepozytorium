@@ -3,9 +3,9 @@
 
 <html>
 <body>
-    <jsp:useBean id="storage" class="zameczki.AllCastlesData" scope="application" />
+    <jsp:useBean id="castleData" class="zameczki.StorageService" scope="application" />
     <%
-        storage.clear();
+    	castleData.clear();
         response.sendRedirect(request.getContextPath());
     %>
 </body>

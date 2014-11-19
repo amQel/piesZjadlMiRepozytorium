@@ -12,20 +12,10 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
 
   private static java.util.Vector _jspx_dependants;
 
-  private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_c_forEach_var_items;
-
   private org.glassfish.jsp.api.ResourceInjector _jspx_resourceInjector;
 
   public Object getDependants() {
     return _jspx_dependants;
-  }
-
-  public void _jspInit() {
-    _jspx_tagPool_c_forEach_var_items = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
-  }
-
-  public void _jspDestroy() {
-    _jspx_tagPool_c_forEach_var_items.release();
   }
 
   public void _jspService(HttpServletRequest request, HttpServletResponse response)
@@ -61,40 +51,64 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("    <title>Message board</title>\n");
       out.write("</head>\n");
       out.write("<body>\n");
-      out.write("    ");
-      zameczki.AllCastlesData storage = null;
-      synchronized (application) {
-        storage = (zameczki.AllCastlesData) _jspx_page_context.getAttribute("storage", PageContext.APPLICATION_SCOPE);
-        if (storage == null){
-          storage = new zameczki.AllCastlesData();
-          _jspx_page_context.setAttribute("storage", storage, PageContext.APPLICATION_SCOPE);
+      zameczki.Castle singleCastle = null;
+      synchronized (session) {
+        singleCastle = (zameczki.Castle) _jspx_page_context.getAttribute("singleCastle", PageContext.SESSION_SCOPE);
+        if (singleCastle == null){
+          singleCastle = new zameczki.Castle();
+          _jspx_page_context.setAttribute("singleCastle", singleCastle, PageContext.SESSION_SCOPE);
         }
       }
       out.write("\n");
       out.write("\n");
-      out.write("    <h2>Message board</h2>\n");
-      out.write("    <br>\n");
-      out.write("\n");
-      out.write("    ");
-      if (_jspx_meth_c_forEach_0(_jspx_page_context))
-        return;
-      out.write("\n");
-      out.write("\n");
-      out.write("    <br/>\n");
-      out.write("\n");
-      out.write("    <p>Add new castle:</p>\n");
-      out.write("\n");
-      out.write("    <form action=\"add.jsp\" method=\"post\">\n");
-      out.write("        castleName: <input type=\"text\" name=\"castleName\"><br/>\n");
-      out.write("        builtDate: <input type=\"text\" name=\"builtDate\"><br/>\n");
-      out.write("\t\tcastleType:<br> Gothic <input type=\"radio\" name=\"castleType\" value=\"gothic\">\n");
-      out.write("\t\t\t\t\t<br> NeoRomantic <input type=\"radio\" name=\"castleType\" value=\"neoromantic\">\n");
-      out.write("\t\t\t\t\t<br> Regular <input type=\"radio\" name=\"castleType\" value=\"regular\">\n");
-      out.write("\t\t<br> visitable <input type=\"checkbox\" name=\"visit\" value=\"true\" checked>\n");
-      out.write("\t\t<br> condition : <input type=\"text\" name=\"condition\">\n");
+      out.write("    <h2>Add Your castle!</h2>\n");
+      out.write("   \n");
+      out.write("    <form action=\"addCastle\" method=\"post\">\n");
+      out.write("        castleName: <input type=\"text\" name=\"castleName\" value=\"");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${singleCastle.castleName}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+      out.write("\"><br/>\n");
+      out.write("        builtDate: <input type=\"text\" name=\"built\" value=\"");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${singleCastle.built}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+      out.write("\"><br/>\n");
+      out.write("\t\tcastleType:<br> Gothic <input type=\"radio\" name=\"castleType\" value=\"gothic\" ");
+      out.print( (singleCastle.getCastleType().contains("gothic"))?("checked='checked'"):"");
+      out.write(">\n");
+      out.write("\t\t\t\t\t<br> NeoRomantic <input type=\"radio\" name=\"castleType\" value=\"neoromantic\" ");
+      out.print( (singleCastle.getCastleType().contains("neoromantic"))?("checked='checked'"):"");
+      out.write(">\n");
+      out.write("\t\t\t\t\t<br> Regular <input type=\"radio\" name=\"castleType\" value=\"regular\" ");
+      out.print( (singleCastle.getCastleType().contains("regular"))?("checked='checked'"):"");
+      out.write(">\n");
+      out.write("\t\t<br> visitTime :\n");
+      out.write("\t\t<br>from 7 to 10 <input type=\"checkbox\" name=\"visitTime\" value=\"From 7 to 10\" ");
+      out.print( (singleCastle.getVisitTime().contains("7 to 10"))?("checked='checked'"):"");
+      out.write(">\n");
+      out.write("\t\t<br>from 10 to 13 <input type=\"checkbox\" name=\"visitTime\" value=\"From 10 to 13\" ");
+      out.print( (singleCastle.getVisitTime().contains("10 to 13"))?("checked='checked'"):"");
+      out.write(">\n");
+      out.write("\t\t<br>from 13 to 16 <input type=\"checkbox\" name=\"visitTime\" value=\"From 13 to 16\" ");
+      out.print( (singleCastle.getVisitTime().contains("13 to 16"))?("checked='checked'"):"");
+      out.write(">\n");
+      out.write("\t\t<br>describe castle's condition: <textarea name=\"ta\"  rows=\"4\" cols=\"50\">");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${singleCastle.condition}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+      out.write("</textarea>\n");
+      out.write("\t\t<br> <select name=\"material\">\n");
+      out.write("\t\t\t\t<option ");
+      out.print( ("Brick".equals(singleCastle))?("selected='selected'"):"");
+      out.write(" >Brick</option>\n");
+      out.write("\t\t\t\t<option ");
+      out.print( ("Wood".equals(singleCastle))?("selected='selected'"):"");
+      out.write(">Wood</option>\n");
+      out.write("\t\t\t\t<option ");
+      out.print( ("Stone".equals(singleCastle))?("selected='selected'"):"");
+      out.write(">Stone</option>\n");
+      out.write("\t\t\t</select>\n");
+      out.write("\t\t\n");
+      out.write("\t\t\n");
       out.write("        <input type=\"submit\" value=\"Add\">\n");
       out.write("    </form>\n");
       out.write("    <a href=\"clear.jsp\">Clear Castles Data</a>\n");
+      out.write("    <a href=\"showCastles.jsp\">Show All Castles</a>\n");
       out.write("</body>\n");
       out.write("</html>\n");
     } catch (Throwable t) {
@@ -108,56 +122,5 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
     } finally {
       _jspxFactory.releasePageContext(_jspx_page_context);
     }
-  }
-
-  private boolean _jspx_meth_c_forEach_0(PageContext _jspx_page_context)
-          throws Throwable {
-    PageContext pageContext = _jspx_page_context;
-    JspWriter out = _jspx_page_context.getOut();
-    //  c:forEach
-    org.apache.taglibs.standard.tag.rt.core.ForEachTag _jspx_th_c_forEach_0 = (org.apache.taglibs.standard.tag.rt.core.ForEachTag) _jspx_tagPool_c_forEach_var_items.get(org.apache.taglibs.standard.tag.rt.core.ForEachTag.class);
-    _jspx_th_c_forEach_0.setPageContext(_jspx_page_context);
-    _jspx_th_c_forEach_0.setParent(null);
-    _jspx_th_c_forEach_0.setVar("castle");
-    _jspx_th_c_forEach_0.setItems((java.lang.Object) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${storage.allCastlesData}", java.lang.Object.class, (PageContext)_jspx_page_context, null));
-    int[] _jspx_push_body_count_c_forEach_0 = new int[] { 0 };
-    try {
-      int _jspx_eval_c_forEach_0 = _jspx_th_c_forEach_0.doStartTag();
-      if (_jspx_eval_c_forEach_0 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
-        do {
-          out.write("\n");
-          out.write("        <p>castleName: ");
-          out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${castle.castleName}", java.lang.String.class, (PageContext)_jspx_page_context, null));
-          out.write("</p>\n");
-          out.write("        <p>builtDate: ");
-          out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${castle.builtDate}", java.lang.String.class, (PageContext)_jspx_page_context, null));
-          out.write("</p>\n");
-          out.write("\t\t<p>castleType: ");
-          out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${castle.castleType}", java.lang.String.class, (PageContext)_jspx_page_context, null));
-          out.write("</p>\n");
-          out.write("\t\t<p>visitable: ");
-          out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${castle.visitable}", java.lang.String.class, (PageContext)_jspx_page_context, null));
-          out.write("</p>\n");
-          out.write("\t\t<p>condition: ");
-          out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${castle.condition}", java.lang.String.class, (PageContext)_jspx_page_context, null));
-          out.write("</p>\n");
-          out.write("    ");
-          int evalDoAfterBody = _jspx_th_c_forEach_0.doAfterBody();
-          if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
-            break;
-        } while (true);
-      }
-      if (_jspx_th_c_forEach_0.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
-        return true;
-      }
-    } catch (Throwable _jspx_exception) {
-      while (_jspx_push_body_count_c_forEach_0[0]-- > 0)
-        out = _jspx_page_context.popBody();
-      _jspx_th_c_forEach_0.doCatch(_jspx_exception);
-    } finally {
-      _jspx_th_c_forEach_0.doFinally();
-      _jspx_tagPool_c_forEach_var_items.reuse(_jspx_th_c_forEach_0);
-    }
-    return false;
   }
 }

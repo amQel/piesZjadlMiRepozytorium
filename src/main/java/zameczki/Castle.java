@@ -1,60 +1,89 @@
 package zameczki;
 
-import java.io.Serializable;
-
-
-public class Castle implements Serializable{
-
-	private String castleName;
-	private int builtDate;
-	private String castleType;
-	private boolean visitable;
-	private String condition;
+public class Castle {
+	
+	private String castleName = "unknown";
+	private int built = 1000;
+	private String castleType = "";
+	private String visitTime = "";
+	private String condition = "semi destroyed castle";
+	private String material = "brick";
+	
 	
 	public Castle() {
 		super();
 	}
 
+
+	public Castle(String castleName, int built, String castleType,
+			String visitTime, String condition, String material) {
+		super();
+		this.castleName = castleName;
+		this.built = built;
+		this.castleType = castleType;
+		this.visitTime = visitTime;
+		this.condition = condition;
+		this.material = material;
+	}
+
+
 	public String getCastleName() {
 		return castleName;
 	}
+
 
 	public void setCastleName(String castleName) {
 		this.castleName = castleName;
 	}
 
-	public int getBuiltDate() {
-		return builtDate;
+
+	public int getBuilt() {
+		return built;
 	}
 
-	public void setBuiltDate(int builtDate) {
-		this.builtDate = builtDate;
+
+	public void setBuilt(int built) {
+		this.built = built;
 	}
+
 
 	public String getCastleType() {
 		return castleType;
 	}
 
+
 	public void setCastleType(String castleType) {
 		this.castleType = castleType;
 	}
 
-	public boolean isVisitable() {
-		return visitable;
+
+	public String getVisitTime() {
+		return visitTime;
 	}
 
-	public void setVisitable(boolean visitable) {
-		this.visitable = visitable;
+
+	public void setVisitTime(String visitTime) {
+		this.visitTime = visitTime;
 	}
+
 
 	public String getCondition() {
 		return condition;
 	}
 
+
 	public void setCondition(String condition) {
 		this.condition = condition;
 	}
-	
+
+
+	public String getMaterial() {
+		return material;
+	}
+
+
+	public void setMaterial(String material) {
+		this.material = material;
+	}
 	
 }
-		
