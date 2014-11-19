@@ -1,7 +1,7 @@
 package zameczki;
 
 public class Castle {
-	
+
 	private String castleName = "unknown";
 	private int built = 1000;
 	private String castleType = "";
@@ -12,6 +12,7 @@ public class Castle {
 	
 	public Castle() {
 		super();
+
 	}
 
 

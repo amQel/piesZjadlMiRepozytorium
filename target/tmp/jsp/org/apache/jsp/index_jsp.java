@@ -59,7 +59,15 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
           _jspx_page_context.setAttribute("singleCastle", singleCastle, PageContext.SESSION_SCOPE);
         }
       }
-      out.write("\n");
+      out.write('\n');
+      zameczki.StorageService castleData = null;
+      synchronized (application) {
+        castleData = (zameczki.StorageService) _jspx_page_context.getAttribute("castleData", PageContext.APPLICATION_SCOPE);
+        if (castleData == null){
+          castleData = new zameczki.StorageService();
+          _jspx_page_context.setAttribute("castleData", castleData, PageContext.APPLICATION_SCOPE);
+        }
+      }
       out.write("\n");
       out.write("    <h2>Add Your castle!</h2>\n");
       out.write("   \n");
@@ -93,22 +101,28 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${singleCastle.condition}", java.lang.String.class, (PageContext)_jspx_page_context, null));
       out.write("</textarea>\n");
       out.write("\t\t<br> <select name=\"material\">\n");
-      out.write("\t\t\t\t<option ");
-      out.print( ("Brick".equals(singleCastle))?("selected='selected'"):"");
+      out.write("\t\t\t\t<option value=\"Brick\" ");
+      out.print( (singleCastle.getMaterial().contains("Brick"))?("selected='selected'"):"");
       out.write(" >Brick</option>\n");
-      out.write("\t\t\t\t<option ");
-      out.print( ("Wood".equals(singleCastle))?("selected='selected'"):"");
+      out.write("\t\t\t\t<option value=\"Wood\" ");
+      out.print( (singleCastle.getMaterial().contains("Wood"))?("selected='selected'"):"");
       out.write(">Wood</option>\n");
-      out.write("\t\t\t\t<option ");
-      out.print( ("Stone".equals(singleCastle))?("selected='selected'"):"");
+      out.write("\t\t\t\t<option value=\"Stone\" ");
+      out.print( (singleCastle.getMaterial().contains("Stone"))?("selected='selected'"):"");
       out.write(">Stone</option>\n");
       out.write("\t\t\t</select>\n");
       out.write("\t\t\n");
       out.write("\t\t\n");
       out.write("        <input type=\"submit\" value=\"Add\">\n");
       out.write("    </form>\n");
-      out.write("    <a href=\"clear.jsp\">Clear Castles Data</a>\n");
-      out.write("    <a href=\"showCastles.jsp\">Show All Castles</a>\n");
+      out.write("    <a href=\"clear.jsp\">Clear Castles Data</a><br>\n");
+      out.write("    <a href=\"showCastles.jsp\">Show All Castles</a><br>\n");
+      out.write("    <form action=\"updateCastle\" method=\"post\">\n");
+      out.write("    <br> Tell me what you want to update<input type=\"text\" name=\"castleUpdateNumber\" value=\"type castle number here 1 - ");
+      out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${castleData.size()}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+      out.write(" [1 - 0 mean there are no castles yet]\">\n");
+      out.write("    <input type=\"submit\" value=\"update this shi.Castle\">\n");
+      out.write("    </form>\n");
       out.write("</body>\n");
       out.write("</html>\n");
     } catch (Throwable t) {

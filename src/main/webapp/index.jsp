@@ -8,7 +8,7 @@
 </head>
 <body>
 <jsp:useBean id="singleCastle" class="zameczki.Castle" scope="session" />
-
+<jsp:useBean id="castleData" class="zameczki.StorageService" scope="application"/>
     <h2>Add Your castle!</h2>
    
     <form action="addCastle" method="post">
@@ -23,15 +23,19 @@
 		<br>from 13 to 16 <input type="checkbox" name="visitTime" value="From 13 to 16" <%= (singleCastle.getVisitTime().contains("13 to 16"))?("checked='checked'"):""%>>
 		<br>describe castle's condition: <textarea name="ta"  rows="4" cols="50">${singleCastle.condition}</textarea>
 		<br> <select name="material">
-				<option <%= ("Brick".equals(singleCastle))?("selected='selected'"):""%> >Brick</option>
-				<option <%= ("Wood".equals(singleCastle))?("selected='selected'"):""%>>Wood</option>
-				<option <%= ("Stone".equals(singleCastle))?("selected='selected'"):""%>>Stone</option>
+				<option value="Brick" <%= (singleCastle.getMaterial().contains("Brick"))?("selected='selected'"):""%> >Brick</option>
+				<option value="Wood" <%= (singleCastle.getMaterial().contains("Wood"))?("selected='selected'"):""%>>Wood</option>
+				<option value="Stone" <%= (singleCastle.getMaterial().contains("Stone"))?("selected='selected'"):""%>>Stone</option>
 			</select>
 		
 		
         <input type="submit" value="Add">
     </form>
-    <a href="clear.jsp">Clear Castles Data</a>
-    <a href="showCastles.jsp">Show All Castles</a>
+    <a href="clear.jsp">Clear Castles Data</a><br>
+    <a href="showCastles.jsp">Show All Castles</a><br>
+    <form action="updateCastle" method="post">
+    <br> Tell me what you want to update<input type="text" name="castleUpdateNumber" value="type castle number here 1 - ${castleData.size()} [1 - 0 mean there are no castles yet]">
+    <input type="submit" value="update this shi.Castle">
+    </form>
 </body>
 </html>
